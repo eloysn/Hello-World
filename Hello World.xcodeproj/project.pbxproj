@@ -77,12 +77,16 @@
 		6A23DC4A1F72D82A008E9643 /* Hello World */ = {
 			isa = PBXGroup;
 			children = (
-				6A23DC4B1F72D82A008E9643 /* AppDelegate.swift */,
-				6A23DC4D1F72D82A008E9643 /* ViewController.swift */,
-				6A23DC4F1F72D82A008E9643 /* Main.storyboard */,
-				6A23DC521F72D82A008E9643 /* Assets.xcassets */,
-				6A23DC541F72D82A008E9643 /* LaunchScreen.storyboard */,
-				6A23DC571F72D82A008E9643 /* Info.plist */,
+				6A23DC741F72D940008E9643 /* View Controllers */,
+				6A23DC731F72D92C008E9643 /* Supporting Files */,
+				6A23DC721F72D913008E9643 /* Storyboards */,
+				6A23DC711F72D8F0008E9643 /* Resources */,
+				6A23DC701F72D8E7008E9643 /* Protocols */,
+				6A23DC6F1F72D8DA008E9643 /* Managers */,
+				6A23DC6E1F72D8C9008E9643 /* Extensions */,
+				6A23DC6D1F72D8BD008E9643 /* Configuration */,
+				6A23DC6C1F72D8AB008E9643 /* Application Delegate */,
+				6A23DC6B1F72D880008E9643 /* Models */,
 			);
 			path = "Hello World";
 			sourceTree = "<group>";
@@ -94,6 +98,82 @@
 				6A23DC621F72D82A008E9643 /* Info.plist */,
 			);
 			path = "Hello WorldTests";
+			sourceTree = "<group>";
+		};
+		6A23DC6B1F72D880008E9643 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6A23DC6C1F72D8AB008E9643 /* Application Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				6A23DC4B1F72D82A008E9643 /* AppDelegate.swift */,
+			);
+			path = "Application Delegate";
+			sourceTree = "<group>";
+		};
+		6A23DC6D1F72D8BD008E9643 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		6A23DC6E1F72D8C9008E9643 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6A23DC6F1F72D8DA008E9643 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		6A23DC701F72D8E7008E9643 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6A23DC711F72D8F0008E9643 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6A23DC521F72D82A008E9643 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6A23DC721F72D913008E9643 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				6A23DC4F1F72D82A008E9643 /* Main.storyboard */,
+				6A23DC541F72D82A008E9643 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		6A23DC731F72D92C008E9643 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6A23DC571F72D82A008E9643 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6A23DC741F72D940008E9643 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6A23DC4D1F72D82A008E9643 /* ViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
