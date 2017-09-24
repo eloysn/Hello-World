@@ -1,13 +1,12 @@
 //
-//  Configurations.swift
+//  Configuration.swift
 //  Hello World
 //
-//  Created by eloysn on 20/9/17.
+//  Created by eloysn on 24/9/17.
 //  Copyright © 2017 eloysn. All rights reserved.
 //
 
 import Foundation
-
 
 struct API {
     
