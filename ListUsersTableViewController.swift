@@ -23,12 +23,20 @@ class ListUsersTableViewController: UITableViewController {
     }
     func getUsers (){
         
-        session.getAllUsers(resource: Session.getAllUser) { users in
-            
-            self.usersViewModel.users = users.map { UserViewModel(user: $0 )}
-            self.usersViewModel.users.sort(by: {  return ($0.name < $1.name) })
-            self.updateUI()
+        session.getAllUsers { users in
+            if let users = users {
+                self.usersViewModel.users = users.map({ user in
+                    UserViewModel(user: user)
+                   
+                })
+                self.usersViewModel.users.sort(by: {  return ($0.name < $1.name) })
+                self.updateUI()
+            }else{
+                //no hay usuarios
+            }
         }
+        
+        
     }
     func updateUI()  {
         DispatchQueue.main.async {
@@ -60,15 +68,6 @@ extension ListUsersTableViewController {
         
         return cell
     }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
     
     // Override to support editing the table view.
@@ -77,42 +76,25 @@ extension ListUsersTableViewController {
             // Delete the row from the data source
             let user = usersViewModel[indexPath.row]
             let id = user.id
-            session.removeUser(resource: Session.remove(id: id), completion: {
-                print("completado")
+            session.removeUser(id: id, completion: {
+                
                 DispatchQueue.main.async {
                     self.usersViewModel.users.remove(at: indexPath.row)
                     self.tableView.deleteRows(at: [indexPath], with: .fade)
                     self.getUsers()
+                    self.showMessage(title: "Usuario eliminado", message: "")
                     self.tableView.reloadData()
-                    
                     
                 }
             })
             
             
         }
-//        }else if editingStyle == .insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }
+        
     }
     
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    }
+    
+}
     
     
     
@@ -144,27 +126,26 @@ extension ListUsersTableViewController {
 //MARK: -Protocol UserCheck
 extension ListUsersTableViewController: UserCheck {
     func createUser(user: User) {
-        
-        session.createUser(resource: Session.create(user: user)) { user in
-            if let user = user {
-                 self.getUsers()
-            }else{
-                
+        session.createUser(user: user) { user in
+            guard let _ = user else {
+                self.showMessage(title: "El usuario ", message: "No se pudo crear")
+                return
             }
-            
+            self.getUsers()
         }
+        
        
     }
     
     func updateUser(user: User) {
         
-        session.updateUser(resource: Session.update(user: user)) { user in
+        session.updateUser(user: user) { user in
             
-            if let user = user {
-                 self.getUsers()
-            }else{
-                
+            guard let _ = user else {
+                self.showMessage(title: "El usuario ", message: "No se pudo actualizar")
+                return
             }
+            self.getUsers()
         }
         
     }

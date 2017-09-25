@@ -6,7 +6,7 @@
 //  Copyright © 2017 eloysn. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension Date  {
     
@@ -16,6 +16,21 @@ extension Date  {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: self)
     }
-        
-
 }
+
+extension UIViewController {
+    
+    func showMessage(title: String, message: String)  {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel) { _ in
+            
+        }
+        alert.addAction(action)
+        self.present(alert, animated: true) {
+            
+        }
+        
+    }
+    
+}
+

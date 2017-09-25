@@ -15,44 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         
-        
-        
-//        ManagerSession().getUser(resorce: Session.getUserId(id: 1366)) { (user) in
-//            guard let u = user else {
-//                print("no user")
-//                return
-//            }
-//            print(u)
-//        }
-//
-//        ManagerSession().getAllUsers(resource: Session.getAllUser) { users in
-//            print(users.count)
-//        }
-//
-//
-//        ManagerSession().removeUser(resource: Session.remove(id: 1366)) {
-//
-//        }
-//
-//        ManagerSession().createUser(resource: Session.create(user: u)) { user in
-//            guard let u = user else {
-//                print("no se pude crear el user")
-//                return
-//            }
-//            print(u)
-//        }
-//
-//        ManagerSession().updateUser(resource: Session.update(user: u)) { user in
-//            guard let u = user else {
-//                print("no se pudo actualizar el user")
-//                return
-//            }
-//            print(u)
-//        }
-//
-//
         return true
     }
 

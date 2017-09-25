@@ -183,9 +183,8 @@
 				6A148CCF1F78CD9100641A84 /* Extensions */,
 				6A148CCE1F78CD2500641A84 /* Protocols */,
 				6A148CCD1F78CCDC00641A84 /* Configurations */,
-				6A23DC4A1F72D82A008E9643 /* Hello World */,
-				6A23DC5F1F72D82A008E9643 /* Hello WorldTests */,
 				6A23DC491F72D82A008E9643 /* Products */,
+				6A23DC5F1F72D82A008E9643 /* Hello WorldTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -196,13 +195,6 @@
 				6A23DC5C1F72D82A008E9643 /* Hello WorldTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		6A23DC4A1F72D82A008E9643 /* Hello World */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Hello World";
 			sourceTree = "<group>";
 		};
 		6A23DC5F1F72D82A008E9643 /* Hello WorldTests */ = {

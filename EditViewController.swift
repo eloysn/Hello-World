@@ -53,12 +53,7 @@ class EditViewController: UIViewController {
     @IBAction func saveUserButton(_ sender: UIButton) {
         
         guard let name = nameText.text, let birthDate = birthDateText.text, name.characters.count >= 1, birthDate.characters.count >= 1  else {
-            let alert = UIAlertController(title: "Campos Vacios", message: "Rellena los campos", preferredStyle: .alert)
-            let acction = UIAlertAction(title: "OK", style: .cancel, handler: { _ in })
-            alert.addAction(acction)
-            present(alert, animated: true, completion: {
-                
-            })
+            self.showMessage(title: "Campos vacios", message: "Rellena los campos")
             return
         }
         
