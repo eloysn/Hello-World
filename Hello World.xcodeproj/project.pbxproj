@@ -49,7 +49,7 @@
 		6A23DC7B1F72DDE4008E9643 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		6A23DC7F1F72DF10008E9643 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		6A2BA4661F78361500C7C7BE /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		6A5D87D61F7648C400767AF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		6A5D87D61F7648C400767AF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A5D87D91F7650B500767AF8 /* JSONDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodable.swift; sourceTree = "<group>"; };
 		6A5D87DB1F76914400767AF8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6A5D87DD1F769AB700767AF8 /* ListUsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUsersTableViewController.swift; sourceTree = "<group>"; };
@@ -76,9 +76,113 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A148CCD1F78CCDC00641A84 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				6A2BA4661F78361500C7C7BE /* Configuration.swift */,
+			);
+			name = Configurations;
+			sourceTree = "<group>";
+		};
+		6A148CCE1F78CD2500641A84 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6A23DC7F1F72DF10008E9643 /* Resource.swift */,
+				6A5D87D91F7650B500767AF8 /* JSONDecodable.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		6A148CCF1F78CD9100641A84 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6A5D87DB1F76914400767AF8 /* Extensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		6A148CD01F78CDA100641A84 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6A23DC751F72DA9D008E9643 /* User.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		6A148CD11F78CDB500641A84 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6A148CD21F78CDDC00641A84 /* View Models */,
+				6A5D87E61F76DE2300767AF8 /* EditViewController.swift */,
+				6A5D87DD1F769AB700767AF8 /* ListUsersTableViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		6A148CD21F78CDDC00641A84 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				6A5D87E21F76B11B00767AF8 /* UserViewModel.swift */,
+				6A5D87E01F769B4200767AF8 /* UsersViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		6A148CD31F78CDFC00641A84 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6A5D87D61F7648C400767AF8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6A148CD41F78CE1000641A84 /* Application Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				6A23DC4B1F72D82A008E9643 /* AppDelegate.swift */,
+			);
+			name = "Application Delegate";
+			sourceTree = "<group>";
+		};
+		6A148CD51F78CE1E00641A84 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				6A23DC4F1F72D82A008E9643 /* Main.storyboard */,
+				6A23DC541F72D82A008E9643 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		6A148CD61F78CE3100641A84 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6A23DC521F72D82A008E9643 /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6A148CD71F78CE4400641A84 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				6A23DC791F72DD1E008E9643 /* ManagerSession.swift */,
+				6A23DC7B1F72DDE4008E9643 /* Session.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 		6A23DC3F1F72D82A008E9643 = {
 			isa = PBXGroup;
 			children = (
+				6A148CD71F78CE4400641A84 /* Managers */,
+				6A148CD61F78CE3100641A84 /* Resources */,
+				6A148CD51F78CE1E00641A84 /* Storyboards */,
+				6A148CD41F78CE1000641A84 /* Application Delegate */,
+				6A148CD31F78CDFC00641A84 /* Supporting Files */,
+				6A148CD11F78CDB500641A84 /* View Controllers */,
+				6A148CD01F78CDA100641A84 /* Models */,
+				6A148CCF1F78CD9100641A84 /* Extensions */,
+				6A148CCE1F78CD2500641A84 /* Protocols */,
+				6A148CCD1F78CCDC00641A84 /* Configurations */,
 				6A23DC4A1F72D82A008E9643 /* Hello World */,
 				6A23DC5F1F72D82A008E9643 /* Hello WorldTests */,
 				6A23DC491F72D82A008E9643 /* Products */,
@@ -97,16 +201,6 @@
 		6A23DC4A1F72D82A008E9643 /* Hello World */ = {
 			isa = PBXGroup;
 			children = (
-				6A2BA4631F78351700C7C7BE /* Configuration */,
-				6A2BA4621F7834DB00C7C7BE /* Protocols */,
-				6A2BA45E1F78346E00C7C7BE /* Models */,
-				6A2BA4591F7833E200C7C7BE /* Extensions */,
-				6A2BA4551F7833AC00C7C7BE /* Managers */,
-				6A2BA4501F78334C00C7C7BE /* Resources */,
-				6A2BA44F1F78332300C7C7BE /* Storyboards */,
-				6A2BA44C1F7832BC00C7C7BE /* Application Delegate */,
-				6A2BA44D1F7832CD00C7C7BE /* Supporting Files */,
-				6A2BA44E1F78330000C7C7BE /* View Controllers */,
 			);
 			path = "Hello World";
 			sourceTree = "<group>";
@@ -118,102 +212,6 @@
 				6A23DC621F72D82A008E9643 /* Info.plist */,
 			);
 			path = "Hello WorldTests";
-			sourceTree = "<group>";
-		};
-		6A2BA44C1F7832BC00C7C7BE /* Application Delegate */ = {
-			isa = PBXGroup;
-			children = (
-				6A23DC4B1F72D82A008E9643 /* AppDelegate.swift */,
-			);
-			name = "Application Delegate";
-			sourceTree = "<group>";
-		};
-		6A2BA44D1F7832CD00C7C7BE /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				6A5D87D61F7648C400767AF8 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		6A2BA44E1F78330000C7C7BE /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				6A5D87E61F76DE2300767AF8 /* EditViewController.swift */,
-				6A5D87DD1F769AB700767AF8 /* ListUsersTableViewController.swift */,
-				6A5D87DF1F769B1800767AF8 /* View Models */,
-			);
-			name = "View Controllers";
-			sourceTree = "<group>";
-		};
-		6A2BA44F1F78332300C7C7BE /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				6A23DC4F1F72D82A008E9643 /* Main.storyboard */,
-				6A23DC541F72D82A008E9643 /* LaunchScreen.storyboard */,
-			);
-			name = Storyboards;
-			sourceTree = "<group>";
-		};
-		6A2BA4501F78334C00C7C7BE /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				6A23DC521F72D82A008E9643 /* Assets.xcassets */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		6A2BA4551F7833AC00C7C7BE /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				6A23DC7B1F72DDE4008E9643 /* Session.swift */,
-				6A23DC791F72DD1E008E9643 /* ManagerSession.swift */,
-			);
-			name = Managers;
-			sourceTree = "<group>";
-		};
-		6A2BA4591F7833E200C7C7BE /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				6A5D87DB1F76914400767AF8 /* Extensions.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		6A2BA45E1F78346E00C7C7BE /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				6A23DC751F72DA9D008E9643 /* User.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		6A2BA4621F7834DB00C7C7BE /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				6A5D87D91F7650B500767AF8 /* JSONDecodable.swift */,
-				6A23DC7F1F72DF10008E9643 /* Resource.swift */,
-			);
-			name = Protocols;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		6A2BA4631F78351700C7C7BE /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				6A2BA4661F78361500C7C7BE /* Configuration.swift */,
-			);
-			name = Configuration;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		6A5D87DF1F769B1800767AF8 /* View Models */ = {
-			isa = PBXGroup;
-			children = (
-				6A5D87E01F769B4200767AF8 /* UsersViewModel.swift */,
-				6A5D87E21F76B11B00767AF8 /* UserViewModel.swift */,
-			);
-			path = "View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

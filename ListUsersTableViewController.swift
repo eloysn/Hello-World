@@ -17,14 +17,16 @@ class ListUsersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getUsers()
-        updateUI()
+        
         
         
     }
     func getUsers (){
         
         session.getAllUsers(resource: Session.getAllUser) { users in
-            self.usersViewModel.users = users.map { UserViewModel(user: $0 )  }
+            
+            self.usersViewModel.users = users.map { UserViewModel(user: $0 )}
+            self.usersViewModel.users.sort(by: {  return ($0.name < $1.name) })
             self.updateUI()
         }
     }
