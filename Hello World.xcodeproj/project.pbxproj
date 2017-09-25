@@ -112,20 +112,11 @@
 		6A148CD11F78CDB500641A84 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6A148CD21F78CDDC00641A84 /* View Models */,
+				6A2237351F79B2900056E5C2 /* View Model */,
 				6A5D87E61F76DE2300767AF8 /* EditViewController.swift */,
 				6A5D87DD1F769AB700767AF8 /* ListUsersTableViewController.swift */,
 			);
 			name = "View Controllers";
-			sourceTree = "<group>";
-		};
-		6A148CD21F78CDDC00641A84 /* View Models */ = {
-			isa = PBXGroup;
-			children = (
-				6A5D87E21F76B11B00767AF8 /* UserViewModel.swift */,
-				6A5D87E01F769B4200767AF8 /* UsersViewModel.swift */,
-			);
-			path = "View Models";
 			sourceTree = "<group>";
 		};
 		6A148CD31F78CDFC00641A84 /* Supporting Files */ = {
@@ -168,6 +159,15 @@
 				6A23DC7B1F72DDE4008E9643 /* Session.swift */,
 			);
 			name = Managers;
+			sourceTree = "<group>";
+		};
+		6A2237351F79B2900056E5C2 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				6A5D87E01F769B4200767AF8 /* UsersViewModel.swift */,
+				6A5D87E21F76B11B00767AF8 /* UserViewModel.swift */,
+			);
+			name = "View Model";
 			sourceTree = "<group>";
 		};
 		6A23DC3F1F72D82A008E9643 = {
