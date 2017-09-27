@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+//Sesion con los distintos endpoint para los recursos
 enum Session {
     case getAllUser
     case getUserId(id: Int)
@@ -16,7 +16,7 @@ enum Session {
     case remove(id: Int)
     
 }
-
+//Damos una implementacion por defecto a la sesion
 extension Session: Resource {
     
     

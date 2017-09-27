@@ -7,36 +7,38 @@
 //
 
 import UIKit
+import RxSwift
 
 class ListUsersTableViewController: UITableViewController {
     
     
     let session = ManagerSession()
     var usersViewModel = UsersViewmodel(users: [UserViewModel]())
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getUsers()
-        
-        
-        
+       
     }
     func getUsers (){
         
-        session.getAllUsers { users in
-            if let users = users {
-                self.usersViewModel.users = users.map({ user in
-                    UserViewModel(user: user)
-                   
-                })
-                self.usersViewModel.users.sort(by: {  return ($0.name < $1.name) })
-                self.updateUI()
-            }else{
-                //no hay usuarios
-            }
-        }
-        
-        
+        session.getAllUsers().subscribe(onNext: { usersOpti in
+            let arrUser = usersOpti.flatMap{return $0 }
+            self.usersViewModel.users = arrUser.map({ user in
+                return UserViewModel(user: user)
+            })
+            self.usersViewModel.users.sort(by: {  return ($0.name < $1.name) })
+            self.updateUI()
+            
+        }, onError: { err in
+            
+        }, onCompleted: {
+            
+        }) {
+            
+        }.addDisposableTo(disposeBag)
+       
     }
     func updateUI()  {
         DispatchQueue.main.async {
@@ -76,8 +78,7 @@ extension ListUsersTableViewController {
             // Delete the row from the data source
             let user = usersViewModel[indexPath.row]
             let id = user.id
-            session.removeUser(id: id, completion: {
-                
+            session.removeUser(id: id, completed: {
                 DispatchQueue.main.async {
                     self.usersViewModel.users.remove(at: indexPath.row)
                     self.tableView.deleteRows(at: [indexPath], with: .fade)
@@ -88,16 +89,12 @@ extension ListUsersTableViewController {
                 }
             })
             
-            
         }
         
     }
-    
-    
 }
     
-    
-    
+
 // MARK: - Navigation
 extension ListUsersTableViewController {
     
@@ -126,27 +123,39 @@ extension ListUsersTableViewController {
 //MARK: -Protocol UserCheck
 extension ListUsersTableViewController: UserCheck {
     func createUser(user: User) {
-        session.createUser(user: user) { user in
-            guard let _ = user else {
+        session.createUser(user: user).subscribe(onNext: { user in
+            if let user = user {
+                self.showMessage(title: "Usuario: \(user.name.description) ", message: "Creado correctamente")
+                self.getUsers()
+            }else{
                 self.showMessage(title: "El usuario ", message: "No se pudo crear")
-                return
             }
-            self.getUsers()
-        }
-        
-       
+        }, onError: { err in
+            self.showMessage(title: "El usuario ", message: "No se pudo crear")
+        }, onCompleted: {
+            
+        }) {
+            
+        }.addDisposableTo(disposeBag)
+      
     }
     
     func updateUser(user: User) {
         
-        session.updateUser(user: user) { user in
-            
-            guard let _ = user else {
-                self.showMessage(title: "El usuario ", message: "No se pudo actualizar")
-                return
+        session.updateUser(user: user).subscribe(onNext: { user in
+            if let user = user {
+                self.showMessage(title: "Usuario: \(user.name) ", message: "Actualizado correctamente")
+                self.getUsers()
+            }else{
+                self.showMessage(title: "El usuario ", message: "No se pudo crear")
             }
-            self.getUsers()
-        }
+        }, onError: { err in
+            self.showMessage(title: "El usuario ", message: "No se pudo crear")
+        }, onCompleted: {
+            
+        }) {
+            
+        }.addDisposableTo(disposeBag)
         
     }
     

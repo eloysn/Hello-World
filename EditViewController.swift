@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+//protocolo delegado para actulizar la lista de usuarios
 protocol UserCheck  {
     
     func createUser (user: User)

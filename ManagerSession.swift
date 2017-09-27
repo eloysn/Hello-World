@@ -7,18 +7,115 @@
 //
 
 import Foundation
+import RxSwift
 
 
-enum errorSession: Error {
+enum ErrorSession: Error {
     case errorFromServer(err: Error)
     case errorInvalidStatusCode
     case errorDecodeJSON
-    case errorResponse(err: Error)
+    case other(error: Error)
     
 }
+//Manager utilizado para manejar la respuesta del servidor
 final class ManagerSession {
     
-    private let session: URLSession = URLSession(configuration: URLSessionConfiguration.default)
+    fileprivate let session: URLSession = URLSession(configuration: URLSessionConfiguration.default)
+    
+    
+    //MARK: - metodos privados para manejar la sesion, en funcion de los recursos pasados, con RXSwift
+    private func data (resorce: Resource) -> Observable<Data> {
+        
+        return Observable.create { observer in
+            let task = self.session.dataTask(with: resorce.requestWithBaseURL()) { data, response, error in
+                if let error = error  {
+                    observer.onError(ErrorSession.other(error: error))
+                }
+                if let response  = (response as? HTTPURLResponse)?.statusCode, 200...300 ~= response     {
+                    observer.onNext(data ?? Data())
+                    observer.onCompleted()
+                }else{
+                     observer.onError(ErrorSession.errorInvalidStatusCode)
+                }
+                
+            }
+            task.resume()
+            return Disposables.create {
+                task.cancel()
+            }
+        }
+    }
+    
+   private func decodeObject (resorce: Resource) -> Observable<JSONDictionary>{
+        
+        return data(resorce: resorce).map{ data in
+            guard let JSONObject =  try? JSONSerialization.jsonObject(with: data, options:[]),
+                let dict = JSONObject as? JSONDictionary else {
+                    throw ErrorSession.errorDecodeJSON
+            }
+            
+            return  dict
+        }
+        
+    }
+
+    
+     private func decodeObjects (resorce: Resource) -> Observable<[JSONDictionary]>  {
+        
+        return data(resorce: resorce).map{ data in
+            guard let JSONObject =  try? JSONSerialization.jsonObject(with: data, options:[]),
+                let dictJSON = JSONObject as? [JSONDictionary] else {
+                throw ErrorSession.errorDecodeJSON
+            }
+            return dictJSON
+        }
+        
+    }
+    
+    func updateUser  (user: User) -> Observable<User?>  {
+        
+        return decodeObject(resorce: Session.update(user: user)).map{ JSONDict   in
+            User(dictionary: JSONDict)
+        }
+        
+    }
+    func createUser(user: User) -> Observable<User?> {
+        return decodeObject(resorce: Session.create(user: user)).map{ JSONDict   in
+            User(dictionary: JSONDict)
+        }
+    }
+    
+    func removeUser(id: Int, completed: @escaping ()->())   {
+        let _ = decodeObject(resorce: Session.remove(id: id)).subscribe {  _ in
+        completed()
+        }
+        
+    
+    }
+    func getUser(id: Int) -> Observable<User?> {
+        return decodeObject(resorce: Session.getUserId(id: id)).map{ JSONDict   in
+            User(dictionary: JSONDict)
+        }
+        
+    }
+    
+    
+    func getAllUsers() -> Observable<[User?]>  {
+        
+          return  decodeObjects(resorce: Session.getAllUser).flatMap { JsonDict  -> Observable<[User?]> in
+            var arr = [User?]()
+            for i in JsonDict {
+                arr.append(User(dictionary: i))
+            }
+            return Observable.from(optional: arr)
+        }
+       
+    }
+    
+}
+
+//MARK: - metodos privados para manejar la sesion, en funcion de los recursos pasados
+extension ManagerSession {
     
     private func data( resorce: Resource, completion: @escaping (Data?, Error?) -> Void)  {
         
@@ -26,19 +123,19 @@ final class ManagerSession {
             
             if let err = error  {
                 print("error: \(err)")
-                completion(nil, errorSession.errorResponse(err: err))
+                completion(nil, ErrorSession.other(error: err))
                 
                 
             }else {
                 if let response  = (response as? HTTPURLResponse)?.statusCode, 200...300 ~= response     {
                     
                     if let data = data {
-                     completion(data, nil)
+                        completion(data, nil)
                         
                     }
                     
                 }else {
-                     completion(nil, errorSession.errorInvalidStatusCode)
+                    completion(nil, ErrorSession.errorInvalidStatusCode)
                 }
             }
             
@@ -46,6 +143,8 @@ final class ManagerSession {
         
         task.resume()
     }
+    
+    
     
     
     private func decodeObject(resorce: Resource, completion: @escaping (JSONDictionary?, Error?)  -> Void)   {
@@ -75,10 +174,10 @@ final class ManagerSession {
         data(resorce: resorce) { (data, err) in
             
             if let err = err {
-                completions([JSONDictionary](), errorSession.errorFromServer(err: err))
+                completions([JSONDictionary](), ErrorSession.errorFromServer(err: err))
             }
             guard let data = data, let JSONObject =  try? JSONSerialization.jsonObject(with: data, options:[]), let dict = JSONObject as? [JSONDictionary] else {
-                completions([JSONDictionary](), errorSession.errorDecodeJSON)
+                completions([JSONDictionary](), ErrorSession.errorDecodeJSON)
                 return
             }
             completions(dict, nil)
@@ -89,7 +188,7 @@ final class ManagerSession {
     
     
     func getUser(id: Int, result: @escaping (User?) -> Void ) {
-
+        
         decodeObject(resorce: Session.getUserId(id: id)) { dict, err in
             if let _ = err  {
                 result(nil)
@@ -144,9 +243,14 @@ final class ManagerSession {
             completion(User(dictionary: dict))
         }
     }
-    
-    
 }
+    
+    
+    
+    
+    
+    
+
     
     
     
